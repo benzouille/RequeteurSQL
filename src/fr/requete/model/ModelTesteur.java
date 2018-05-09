@@ -26,12 +26,16 @@ public class ModelTesteur {
 	private Object[][] donnee;
 	private boolean erreur = false;
 	
+	
+	public ModelTesteur() {
+		requete(requete);
+	}
 	/**
 	 * Insertion de la requete sql 
 	 * @param requete
 	 */
-	public ModelTesteur() {
-		long startTime = System.currentTimeMillis();
+	public void requete(String requete) {
+long startTime = System.currentTimeMillis();
 		
 		try {
 			//Création d'un objet Statement
@@ -96,7 +100,7 @@ public class ModelTesteur {
 			System.out.println("temps en ms : "+temps+" et affiche " +lignes+" ligne(s)"); //DEBUG------------------------------------------------
 		}
 	}
-
+	
 	//SETTER GUETTER
 	public long getTemps() {return temps;}
 	public void setTemps(long temps) {this.temps = temps;}

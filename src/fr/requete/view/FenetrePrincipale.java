@@ -35,10 +35,8 @@ public class FenetrePrincipale extends JFrame {
 	//JToolBar
 	private JToolBar toolBar = new JToolBar();
 	private Run run = new Run();
-	//TODO pourquoi l'image ne fonctionne pas ?
 	private JButton exe = new JButton(new ImageIcon("ressources/images/play.png"));
-	//private JButton exe = new JButton(new ImageIcon("play.png"));
-	//private JButton exe = new JButton("run");
+	
 	//Boolean
 	//private Boolean effaceText = true;
 
@@ -48,11 +46,7 @@ public class FenetrePrincipale extends JFrame {
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setLocationRelativeTo(null);
 
-		container.setBackground(Color.white);
-		container.setLayout(new BorderLayout());
-		container.add(sousContainer);
-
-		this.setContentPane(container);
+		
 		initFenetre();
 		initTableau();
 		initToolBar();
@@ -64,7 +58,7 @@ public class FenetrePrincipale extends JFrame {
 		textRequete.setPreferredSize(new Dimension(1004, 200));
 		textRequete.addMouseListener( new  MouseAdapter(){
 			public void mousePressed(MouseEvent e) {
-				//TDOD ne fonctione pas pour garder le text une fois cliqué une premiere fois, peut être essayer de comparer le texte inscrit avec le texte initial  
+				//TODO ne fonctione pas pour garder le text une fois cliqué une premiere fois, peut être essayer de comparer le texte inscrit avec le texte initial  
 				//if (effaceText = true) {
 					//effaceText = false;
 					//textRequete.setText(""); 	
@@ -79,6 +73,13 @@ public class FenetrePrincipale extends JFrame {
 		timeRequete.setOpaque(true);
 		timeRequete.setPreferredSize(new Dimension(1004, 25));
 		container.add(timeRequete, BorderLayout.SOUTH);
+		
+		container.setBackground(Color.white);
+		container.setLayout(new BorderLayout());
+		container.add(sousContainer);
+
+		this.setContentPane(container);
+		
 		System.out.println("c'est l'initFenetre"); //DEBUG------------------------------------------------
 	}
 
@@ -105,16 +106,19 @@ public class FenetrePrincipale extends JFrame {
 	public void refresh() {
 		if(mt.isErreur()) {reset();}
 		else {
+			this.
 			removeAll();
 			
 			String textFieldValue = textRequete.getText();
 			System.out.println(textFieldValue); //DEBUG------------------------------------------------
-			mt.setRequete(textFieldValue);
+			mt.requete(textFieldValue);
 			String time = ("La requête a été retournée en "+mt.getTemps()+ " ms et a retournée "+mt.getLignes()+" ligne(s)");
 			timeRequete.setText(time);
 			initFenetre();
 			initTableau();
 			System.out.println("c'est le refresh"); //DEBUG------------------------------------------------
+			String []titreCol = mt.getTitre();
+			System.out.println("titre des colones"+titreCol.toString()); //DEBUG------------------------------------------------
 			
 			revalidate();	
 		}
