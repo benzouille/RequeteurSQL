@@ -31,7 +31,7 @@ public class FenetrePrincipale extends JFrame {
 	private JPanel sousContainer = new JPanel();
 	private JTextArea textRequete = new JTextArea("Entrez votre requête SQL");
 	private JLabel timeRequete = new JLabel("Durée de la requête");
-	private JTable tabResult;
+	private JTable tabResult = null;
 	//JToolBar
 	private JToolBar toolBar = new JToolBar();
 	private Run run = new Run();
@@ -46,10 +46,10 @@ public class FenetrePrincipale extends JFrame {
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setLocationRelativeTo(null);
 
-		
 		initFenetre();
 		initTableau();
 		initToolBar();
+		
 		this.setVisible(true);
 	}
 
@@ -64,7 +64,6 @@ public class FenetrePrincipale extends JFrame {
 					//textRequete.setText(""); 	
 				//}
 			}
-
 		});
 		//textRequete
 		sousContainer.add(textRequete, BorderLayout.NORTH);
@@ -84,8 +83,6 @@ public class FenetrePrincipale extends JFrame {
 	}
 
 	public void initTableau() {
-		//tabResult
-
 		tabResult = new JTable(mt.getDonnee(), mt.getTitre());
 		tabResult.setPreferredSize(new Dimension(1004, 400));
 		sousContainer.add(new JScrollPane(tabResult), BorderLayout.CENTER);
@@ -106,9 +103,8 @@ public class FenetrePrincipale extends JFrame {
 	public void refresh() {
 		if(mt.isErreur()) {reset();}
 		else {
-			this.
-			removeAll();
-			
+			container.removeAll();
+			tabResult.removeAll();
 			String textFieldValue = textRequete.getText();
 			System.out.println(textFieldValue); //DEBUG------------------------------------------------
 			mt.requete(textFieldValue);
@@ -119,8 +115,8 @@ public class FenetrePrincipale extends JFrame {
 			System.out.println("c'est le refresh"); //DEBUG------------------------------------------------
 			String []titreCol = mt.getTitre();
 			System.out.println("titre des colones"+titreCol.toString()); //DEBUG------------------------------------------------
-			
-			revalidate();	
+			tabResult.revalidate();
+			container.revalidate();
 		}
 	}
 
